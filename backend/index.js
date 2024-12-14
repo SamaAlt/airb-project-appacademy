@@ -1,3 +1,6 @@
+// backend/index.js
+
+
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
@@ -19,6 +22,13 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+
+// Set Content Security Policy header (updated and more permissive code)
+app.use((req, res, next) => {
+  // Explicitly allow 'localhost:8000' for 'connect-src' and also set 'default-src' to allow basic content
+  res.setHeader("Content-Security-Policy", "default-src 'self'; connect-src 'self' http://localhost:8000;");
+  next();
+});
 
 // Security Middleware
 if (!isProduction) {
