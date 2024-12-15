@@ -1,5 +1,6 @@
 // backend/app.js
 const express = require('express');
+require('dotenv').config();  // Add this line at the top
 const PORT = process.env.PORT || 8000;
 require('express-async-errors');
 const morgan = require('morgan');
@@ -54,7 +55,6 @@ app.use((_req, _res, next) => {
   next(err);
 });
 
-
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
   // check if error is a Sequelize error:
@@ -80,9 +80,9 @@ app.use((err, _req, res, _next) => {
     stack: isProduction ? null : err.stack
   });
 });
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-// ...
 
 module.exports = app;
