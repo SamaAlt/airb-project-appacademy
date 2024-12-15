@@ -1,12 +1,11 @@
 'use strict';
 
-const { Model, DataTypes } = require('sequelize');
-const validator = require('validator');  // Import validator
+const { Model, Validator } = require('sequelize');
 
-module.exports = (sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // Define associations here
+      // define association here
     }
   }
 
@@ -17,49 +16,40 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
         validate: {
-          len: {
-            args: [4, 30],
-            msg: 'Username must be between 4 and 30 characters'
-          },
+          len: [4, 30],
           isNotEmail(value) {
-            if (validator.isEmail(value)) {
-              throw new Error('Username cannot be an email address');
+            if (Validator.isEmail(value)) {
+              throw new Error('Cannot be an email.');
             }
-          }
-        }
+          },
+        },
       },
-
       email: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
         validate: {
-          len: {
-            args: [3, 256],
-            msg: 'Email must be between 3 and 256 characters'
-          },
-          isEmail: {
-            msg: 'Email must be a valid email address'
-          }
-        }
+          len: [3, 256],
+          isEmail: true,
+        },
       },
-
       hashedPassword: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
-          len: {
-            args: [60, 60],
-            msg: 'Password must be 60 characters long'
-          }
-        }
-      }
+          len: [60, 60],
+        },
+      },
     },
     {
       sequelize,
       modelName: 'User',
+      defaultScope: {
+        attributes: {
+          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+        },
+      },
     }
   );
-
   return User;
 };
