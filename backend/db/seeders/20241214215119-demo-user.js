@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    console.log('Seeding demo users...');
     await User.bulkCreate([
       {
         email: 'demo@user.io',
@@ -23,12 +22,9 @@ module.exports = {
         hashedPassword: bcrypt.hashSync('password3'),
       },
     ]);
-    console.log('Demo users seeded successfully');
   },
 
   async down(queryInterface, Sequelize) {
-    console.log('Deleting demo users...');
     await queryInterface.bulkDelete('Users', null, {});
-    console.log('Demo users deleted successfully');
   },
 };
