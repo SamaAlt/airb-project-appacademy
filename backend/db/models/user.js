@@ -40,6 +40,14 @@ module.exports = (sequelize, DataTypes) => {
           len: [60, 60],
         },
       },
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: true, // Update based on your requirements
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: true, // Update based on your requirements
+      },
     },
     {
       sequelize,
@@ -51,5 +59,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   );
+
   return User;
 };
