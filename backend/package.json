@@ -1,7 +1,6 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "- Create your DB Schema with dbdigram.io\r - Use the Req/Res of the API Docs to inform your DB Schema creation",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,7 +10,7 @@
     "sequelize-cli": "sequelize-cli",
     "start:development": "nodemon ./bin/www",
     "start:production": "node ./bin/www",
-    "build": "node psql-setup-script.js"
+    "build": "node psql-setup-script.js" 
   },
   "keywords": [],
   "author": "",
