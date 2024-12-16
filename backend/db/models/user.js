@@ -5,7 +5,7 @@ const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // define association here
+      // Define associations here if needed
     }
   }
 
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
           len: [4, 30],
           isNotEmail(value) {
             if (Validator.isEmail(value)) {
-              throw new Error('Cannot be an email.');
+              throw new Error('Username cannot be an email.');
             }
           },
         },
@@ -37,16 +37,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING.BINARY,
         allowNull: false,
         validate: {
-          len: [60, 60],
+          len: [60, 64], // Updated length validation for bcrypt hashes
         },
       },
       firstName: {
         type: DataTypes.STRING,
-        allowNull: true, // Update based on your requirements
+        allowNull: false,
+        validate: {
+          len: [1, 50],
+        },
       },
       lastName: {
         type: DataTypes.STRING,
-        allowNull: true, // Update based on your requirements
+        allowNull: false,
+        validate: {
+          len: [1, 50],
+        },
       },
     },
     {
@@ -55,6 +61,13 @@ module.exports = (sequelize, DataTypes) => {
       defaultScope: {
         attributes: {
           exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+        },
+      },
+      scopes: {
+        withSensitiveInfo: {
+          attributes: {
+            include: ['email', 'createdAt', 'updatedAt'],
+          },
         },
       },
     }

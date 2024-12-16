@@ -1,7 +1,9 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
+    // Create the Users table with the necessary columns
     await queryInterface.createTable('Users', {
       id: {
         allowNull: false,
@@ -9,33 +11,41 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING(30),
+      email: {
+        type: Sequelize.STRING(255),
         allowNull: false,
         unique: true
       },
-      email: {
-        type: Sequelize.STRING(256),
+      username: {
+        type: Sequelize.STRING(255),
         allowNull: false,
         unique: true
       },
       hashedPassword: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(255),
+        allowNull: false
+      },
+      firstName: {
+        type: Sequelize.STRING(255),
+        allowNull: false
+      },
+      lastName: {
+        type: Sequelize.STRING(255),
         allowNull: false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        type: Sequelize.DATE
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+
+  async down (queryInterface, Sequelize) {
+    // Drop the Users table if rolling back the migration
     await queryInterface.dropTable('Users');
   }
 };
