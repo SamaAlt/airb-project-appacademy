@@ -1,5 +1,5 @@
 {
-  "name": "airb-project-appacademy",
+  "name": "1-airb-project-appacademy",
   "version": "1.0.0",
   "description": "// README FOR AIRB",
   "main": "index.js",
@@ -12,19 +12,7 @@
     "start": "npm start --prefix backend",
     "build": "npm run --prefix backend build"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SamaAlt/airb-project-appacademy.git"
-  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/SamaAlt/airb-project-appacademy/issues"
-  },
-  "homepage": "https://github.com/SamaAlt/airb-project-appacademy#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "express-validator": "^7.2.0"
-  }
+  "license": "ISC"
 }
