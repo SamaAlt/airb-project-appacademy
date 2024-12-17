@@ -20,7 +20,7 @@ module.exports = {
       }
     },
     define: {
-      schema: process.env.SCHEMA || airb_appacademy
+      schema: process.env.SCHEMA
     }
   }
 };
